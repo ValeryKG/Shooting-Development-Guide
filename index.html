@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Basketball Shooting Development Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            min-height: 100vh;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        header {
+            background: linear-gradient(45deg, #1a1a2e, #16213e);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        nav {
+            background: #2c3e50;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        nav li a {
+            color: white;
+            text-decoration: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        nav li a:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+        
+        main {
+            padding: 2rem;
+        }
+        
+        section {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: #2c3e50;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #3498db;
+        }
+        
+        h3 {
+            color: #34495e;
+            font-size: 1.5rem;
+            margin: 1.5rem 0 1rem 0;
+        }
+        
+        h4 {
+            color: #2c3e50;
+            font-size: 1.2rem;
+            margin: 1rem 0 0.5rem 0;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+        }
+        
+        .warning-box {
+            background: linear-gradient(135deg, #fd79a8, #e84393);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .data-table th {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+        }
+        
+        .data-table td {
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .data-table tbody tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .citation {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+            margin-left: 0.5rem;
+        }
+        
+        .drill-card {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-left: 5px solid #28a745;
+        }
+        
+        .troubleshoot-item {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-left: 4px solid #f39c12;
+        }
+        
+        .progress-indicator {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #ecf0f1;
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+        
+        .progress-step {
+            flex: 1;
+            text-align: center;
+            padding: 0.5rem;
+            margin: 0 0.5rem;
+            background: white;
+            border-radius: 8px;
+            border: 2px solid #bdc3c7;
+        }
+        
+        .progress-step.active {
+            border-color: #3498db;
+            background: #e3f2fd;
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+            }
+            
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            main {
+                padding: 1rem;
+            }
+            
+            section {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏀 Complete Basketball Shooting Development Guide</h1>
+            <p>Evidence-Based Training for Coaches and Players</p>
+        </header>
+        
+        <nav>
+            <ul>
+                <li><a href="#quick-reference">Quick Reference</a></li>
+                <li><a href="#fundamentals">Fundamentals</a></li>
+                <li><a href="#intermediate">Intermediate</a></li>
+                <li><a href="#advanced">Advanced</a></li>
+                <li><a href="#troubleshooting">Troubleshooting</a></li>
+                <li><a href="#drills">Drill Library</a></li>
+            </ul>
+        </nav>
+        
+        <main>
+            <section id="quick-reference">
+                <h2>📋 Quick Reference Guide</h2>
+                
+                <div class="highlight-box">
+                    <h3>Core Principle: Body Readiness First</h3>
+                    <p><strong>Just as you wouldn't ask an 8-year-old to deadlift 200 pounds, don't ask unprepared players to shoot beyond their physical capabilities.</strong></p>
+                </div>
+                
+                <h3>Shot Value by Location (Points Per Possession)</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Shot Location</th>
+                            <th>Success Rate</th>
+                            <th>PPP</th>
+                            <th>Priority Level</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>At the Rim</td>
+                            <td>68-72%</td>
+                            <td>1.30-1.40</td>
+                            <td>🔥 Highest</td>
+                        </tr>
+                        <tr>
+                            <td>Corner 3-Point</td>
+                            <td>38-42%</td>
+                            <td>1.15-1.25</td>
+                            <td>⭐ High</td>
+                        </tr>
+                        <tr>
+                            <td>Above Break 3-Point</td>
+                            <td>35-40%</td>
+                            <td>1.05-1.15</td>
+                            <td>✓ Medium</td>
+                        </tr>
+                        <tr>
+                            <td>Mid-Range (16-24ft)</td>
+                            <td>40-45%</td>
+                            <td>0.90-0.95</td>
+                            <td>⚠️ Selective</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3>Development Progression</h3>
+                <div class="progress-indicator">
+                    <div class="progress-step active">
+                        <strong>Foundation</strong><br>
+                        Form & Mechanics
+                    </div>
+                    <div class="progress-step">
+                        <strong>Consistency</strong><br>
+                        Close Range Mastery
+                    </div>
+                    <div class="progress-step">
+                        <strong>Extension</strong><br>
+                        Gradual Range Increase
+                    </div>
+                    <div class="progress-step">
+                        <strong>Specialization</strong><br>
+                        Game Application
+                    </div>
+                </div>
+                
+                <div class="warning-box">
+                    <h4>⚠️ Critical Coaching Reminders</h4>
+                    <ul>
+                        <li><strong>No Universal Solution:</strong> Every player requires individual assessment and development</li>
+                        <li><strong>Technology Limits:</strong> Naked eye observation has limitations - data analysis always wins</li>
+                        <li><strong>Performance Plateau:</strong> Elite players plateau around 75% free throw accuracy due to human motor variability</li>
+                        <li><strong>Fatigue Impact:</strong> Game-realistic training must include shooting under fatigue conditions</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section id="fundamentals">
+                <h2>🎯 Fundamentals: Building the Foundation</h2>
+                
+                <h3>Understanding Shot Value Economics</h3>
+                <p>Modern basketball has revealed a fundamental truth: <strong>outside of 6 feet from the basket, no location on the court yields shooting percentages above 45%</strong>. This means shot selection is about maximizing value, not just making shots.</p>
+                
+                <div class="highlight-box">
+                    <h4>The Mathematics of Shot Selection</h4>
+                    <p>A 35% three-point shooter (1.05 PPP) provides more value than a 50% mid-range shooter (1.00 PPP). However, individual player strengths must override general statistics.</p>
+                </div>
+                
+                <h3>Physical Readiness Assessment</h3>
+                <p>Before extending shooting range, players must demonstrate:</p>
+                <ul>
+                    <li><strong>Consistent Form:</strong> 70%+ accuracy from current comfortable range</li>
+                    <li><strong>Proper Mechanics:</strong> Balanced stance, consistent release point, appropriate arc</li>
+                    <li><strong>Physical Strength:</strong> Ability to maintain form without compensation patterns</li>
+                    <li><strong>Muscle Conditioning:</strong> Forearm, shoulder, and core strength for distance</li>
+                </ul>
+                
+                <h3>Basic Shooting Mechanics</h3>
+                
+                <h4>Release Parameters</h4>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Distance</th>
+                            <th>Optimal Launch Angle</th>
+                            <th>Release Speed (mph)</th>
+                            <th>Key Focus</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2 feet</td>
+                            <td>52-55°</td>
+                            <td>10</td>
+                            <td>Soft touch</td>
+                        </tr>
+                        <tr>
+                            <td>Free Throw</td>
+                            <td>48-50°</td>
+                            <td>15</td>
+                            <td>Arc consistency</td>
+                        </tr>
+                        <tr>
+                            <td>3-Point</td>
+                            <td>45-47°</td>
+                            <td>18</td>
+                            <td>Power generation</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="warning-box">
+                    <h4>🚨 Common Development Mistakes</h4>
+                    <ul>
+                        <li><strong>Premature Range Extension:</strong> Shooting 3-pointers before mastering free throws</li>
+                        <li><strong>Compensation Patterns:</strong> Body twisting, excessive shoulder use, improper release</li>
+                        <li><strong>Ignoring Fatigue:</strong> Only practicing shots when fresh</li>
+                        <li><strong>One-Size-Fits-All:</strong> Applying universal techniques without individual assessment</li>
+                    </ul>
+                </div>
+                
+                <h3>The 75% Principle</h3>
+                <p>Research shows that NBA players have maintained approximately 75% free throw accuracy for five decades, suggesting this represents a human performance ceiling rather than a development threshold. For developing players:</p>
+                <ul>
+                    <li><strong>Youth Players:</strong> Focus on 60-70% consistency before range extension</li>
+                    <li><strong>High School:</strong> Achieve 70-75% at current range before progression</li>
+                    <li><strong>College/Pro:</strong> Maintain 75%+ while optimizing individual mechanics</li>
+                </ul>
+            </section>
+            
+            <section id="intermediate">
+                <h2>📈 Intermediate Development: Building Consistency</h2>
+                
+                <h3>Individual Assessment Framework</h3>
+                <p>Every player requires unique development based on physical attributes, motor patterns, and playing style. Key assessment areas:</p>
+                
+                <h4>Physical Attributes</h4>
+                <ul>
+                    <li><strong>Arm Length:</strong> Longer arms may require adjusted shooting form</li>
+                    <li><strong>Hand Size:</strong> Affects ball control and release mechanics</li>
+                    <li><strong>Flexibility:</strong> Shoulder and wrist mobility impact shooting motion</li>
+                    <li><strong>Strength Distribution:</strong> Balance between forearm, shoulder, and core strength</li>
+                </ul>
+                
+                <h4>Motor Learning Patterns</h4>
+                <div class="highlight-box">
+                    <h4>Research Insight: Ball Path Smoothness</h4>
+                    <p>Studies show that <strong>terminal smoothness</strong> (end of shooting motion) explains more shooting performance variance than early motion mechanics. Focus coaching attention on the final phase of the shot.</p>
+                    <span class="citation">(Slegers & Love, 2024)</span>
+                </div>
+                
+                <h3>Position-Specific Development</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Position</th>
+                            <th>Primary Focus</th>
+                            <th>Key Metrics</th>
+                            <th>Training Emphasis</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Point Guard</td>
+                            <td>Off-dribble accuracy</td>
+                            <td>Quick release (0.4-0.5s)</td>
+                            <td>Decision making under pressure</td>
+                        </tr>
+                        <tr>
+                            <td>Shooting Guard</td>
+                            <td>Catch-and-shoot</td>
+                            <td>High volume consistency</td>
+                            <td>Movement shooting</td>
+                        </tr>
+                        <tr>
+                            <td>Forward</td>
+                            <td>Versatility</td>
+                            <td>Multiple distances</td>
+                            <td>Size-up moves</td>
+                        </tr>
+                        <tr>
+                            <td>Center</td>
+                            <td>Close-range efficiency</td>
+                            <td>High release point</td>
+                            <td>Post-up shooting</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3>Fatigue Impact and Training</h3>
+                <p>Research demonstrates significant shooting accuracy decline under fatigue conditions. Training must replicate game demands:</p>
+                
+                <h4>Fatigue Effects by Intensity</h4>
+                <ul>
+                    <li><strong>Mild Fatigue (65-75% max HR):</strong> 5-8% accuracy decrease</li>
+                    <li><strong>Moderate Fatigue (75-85% max HR):</strong> 10-15% accuracy decrease</li>
+                    <li><strong>Severe Fatigue (85%+ max HR):</strong> 15-25% accuracy decrease</li>
+                </ul>
+                
+                <div class="highlight-box">
+                    <h4>Game Reality Check</h4>
+                    <p>Players spend 75% of game time above 85% maximum heart rate. Training only under fresh conditions creates a false sense of shooting ability.</p>
+                    <span class="citation">(García et al., 2020)</span>
+                </div>
+                
+                <h3>Technology vs. Observation</h3>
+                <p>Understanding the limitations of visual assessment:</p>
+                
+                <h4>What Coaches Can See</h4>
+                <ul>
+                    <li>Gross mechanical errors</li>
+                    <li>Obvious compensation patterns</li>
+                    <li>Basic trajectory and arc</li>
+                    <li>Foot positioning and balance</li>
+                </ul>
+                
+                <h4>What Requires Technology</h4>
+                <ul>
+                    <li>Precise release angles (±2-3 degrees)</li>
+                    <li>Ball rotation rates</li>
+                    <li>Micro-movements in joints</li>
+                    <li>Force distribution patterns</li>
+                </ul>
+                
+                <div class="warning-box">
+                    <h4>⚡ Technology Insight</h4>
+                    <p>Above 85% shooting accuracy, differences between made and missed shots become nearly imperceptible even with high-speed cameras. At elite levels, relative comparison of a player's own shots becomes more valuable than comparison to general technique standards.</p>
+                </div>
+            </section>
+            
+            <section id="advanced">
+                <h2>🔬 Advanced Biomechanics: Elite-Level Optimization</h2>
+                
+                <h3>Biomechanical Optimization Principles</h3>
+                <p>For coaches working with advanced players, understanding the science behind shooting mechanics enables precise adjustments:</p>
+                
+                <h4>Release Parameter Optimization</h4>
+                <div class="highlight-box">
+                    <h4>Research Finding: Individual Optimization</h4>
+                    <p>Maximum shooting performance occurs when athletes match release parameters to their unique mechanics rather than conforming to predetermined "ideal" angles. Each player has an optimal release configuration based on their physical attributes.</p>
+                    <span class="citation">(Slegers, 2022)</span>
+                </div>
+                
+                <h3>Advanced Analysis Techniques</h3>
+                
+                <h4>Ball Path Curvature Analysis</h4>
+                <p>Modern research reveals that shooting smoothness should be quantified through ball path curvature:</p>
+                <ul>
+                    <li><strong>Maximum Curvature:</strong> Highest bend in ball path during motion</li>
+                    <li><strong>Terminal Curvature:</strong> Smoothness at end of shooting motion</li>
+                    <li><strong>Key Finding:</strong> Terminal curvature shows stronger correlation with shooting success</li>
+                </ul>
+                
+                <h4>Defensive Pressure Adaptations</h4>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Opponent Height Advantage</th>
+                            <th>Jump Height Increase</th>
+                            <th>Entry Angle Change</th>
+                            <th>Accuracy Impact</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>+20cm</td>
+                            <td>+1.5cm</td>
+                            <td>+4.3°</td>
+                            <td>-2.1%</td>
+                        </tr>
+                        <tr>
+                            <td>+40cm</td>
+                            <td>+2.3cm</td>
+                            <td>+7.2°</td>
+                            <td>-10.8%</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <span class="citation">(Kambič et al., 2022)</span>
+                
+                <h3>Motor Learning and Adaptation</h3>
+                
+                <h4>Calibration Effects</h4>
+                <p>Research on NBA free throws reveals calibration effects in consecutive attempts:</p>
+                <ul>
+                    <li><strong>First Attempt:</strong> Lowest success rate (baseline)</li>
+                    <li><strong>Second Attempt:</strong> 3-5% improvement</li>
+                    <li><strong>Third Attempt:</strong> Additional 2-3% improvement</li>
+                </ul>
+                
+                <div class="highlight-box">
+                    <h4>Training Implication</h4>
+                    <p>Warm-up shooting should include multiple consecutive attempts from the same spot to activate calibration mechanisms. Single-shot practice may not translate to game performance.</p>
+                </div>
+                
+                <h3>Advanced Technology Integration</h3>
+                
+                <h4>High-Speed Analysis Requirements</h4>
+                <p>For elite-level shooting analysis:</p>
+                <ul>
+                    <li><strong>Frame Rate:</strong> Minimum 120 fps, optimal 240 fps</li>
+                    <li><strong>Focus Areas:</strong> Wrist snap, finger release, ball rotation</li>
+                    <li><strong>Measurement Precision:</strong> ±1 degree angle accuracy</li>
+                    <li><strong>Force Plate Integration:</strong> Ground reaction force patterns</li>
+                </ul>
+                
+                <h4>Biomechanical Markers for Elite Shooters</h4>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Elite Range</th>
+                            <th>Assessment Method</th>
+                            <th>Training Focus</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Release Time</td>
+                            <td>0.35-0.45 seconds</td>
+                            <td>High-speed video</td>
+                            <td>Rhythm training</td>
+                        </tr>
+                        <tr>
+                            <td>Ball Entry Angle</td>
+                            <td>45-48 degrees</td>
+                            <td>Trajectory analysis</td>
+                            <td>Arc consistency</td>
+                        </tr>
+                        <tr>
+                            <td>Backspin Rate</td>
+                            <td>130-150 rpm</td>
+                            <td>Rotation tracking</td>
+                            <td>Follow-through</td>
+                        </tr>
+                        <tr>
+                            <td>Side Spin</td>
+                            <td><3 degrees</td>
+                            <td>3D ball tracking</td>
+                            <td>Release alignment</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3>Individual Variation Factors</h3>
+                <p>Advanced coaching requires understanding how physical attributes affect optimal mechanics:</p>
+                
+                <h4>Anthropometric Influences</h4>
+                <ul>
+                    <li><strong>Hand-to-Height Ratio:</strong> Affects optimal release point</li>
+                    <li><strong>Arm Length Index:</strong> Influences shooting arc requirements</li>
+                    <li><strong>Shoulder Flexibility:</strong> Determines optimal elbow positioning</li>
+                    <li><strong>Core Strength Distribution:</strong> Affects power generation patterns</li>
+                </ul>
+                
+                <div class="warning-box">
+                    <h4>🧬 Genetic Limitations</h4>
+                    <p>Research suggests inherent movement variability imposes performance barriers. Even NBA players haven't exceeded 80% season free throw accuracy in 50 years, indicating biological limits to motor precision.</p>
+                    <span class="citation">(McDonnell & Ward, 2011)</span>
+                </div>
+            </section>
+            
+            <section id="troubleshooting">
+                <h2>🔧 Troubleshooting Guide</h2>
+                
+                <h3>Common Problems and Solutions</h3>
+                
+                <div class="troubleshoot-item">
+                    <h4>Problem: Inconsistent Arc/Trajectory</h4>
+                    <p><strong>Symptoms:</strong> Shots hitting front rim, inconsistent depth</p>
+                    <p><strong>Likely Causes:</strong> Insufficient leg drive, premature range extension, fatigue compensation</p>
+                    <p><strong>Solutions:</strong></p>
+                    <ul>
+                        <li>Return to closer distance until 70%+ accuracy achieved</li>
+                        <li>Strengthen lower body and core</li>
+                        <li>Practice shooting form under fatigue conditions</li>
+                        <li>Video analysis of release angle consistency</li>
+                    </ul>
+                </div>
+                
+                <div class="troubleshoot-item">
+                    <h4>Problem: Left/Right Misses (Side Spin)</h4>
+                    <p><strong>Symptoms:</strong> Shots consistently missing to one side</p>
+                    <p><strong>Likely Causes:</strong> Thumb interference, elbow positioning, hand placement</p>
+                    <p><strong>Solutions:</strong></p>
+                    <ul>
+                        <li>Check shooting hand placement on ball</li>
+                        <li>Ensure guide hand stays passive through release</li>
+                        <li>Practice wall shooting for straight follow-through</li>
+                        <li>Video analysis from behind shooter</li>
+                    </ul>
+                </div>
+                
+                <div class="troubleshoot-item">
+                    <h4>Problem: Decreased Accuracy Under Pressure</h4>
+                    <p><strong>Symptoms:</strong> Good practice shooter, poor game performance</p>
+                    <p><strong>Likely Causes:</strong> Insufficient pressure training, rhythm disruption, mental factors</p>
+                    <p><strong>Solutions:</strong></p>
+                    <ul>
+                        <li>Incorporate game-speed shooting drills</li>
+                        <li>Practice shooting after defensive movements</li>
+                        <li>Add crowd noise and time pressure to training</li>
+                        <li>Develop consistent pre-shot routine</li>
+                    </ul>
+                </div>
+                
+                <div class="troubleshoot-item">
+                    <h4>Problem: Plateau at Current Level</h4>
+                    <p><strong>Symptoms:</strong> No improvement despite consistent practice</p>
+                    <p><strong>Likely Causes:</strong> Motor pattern limitations, inadequate challenge, biomechanical ceiling</p>
+                    <p><strong>Solutions:</strong></p>
+                    <ul>
+                        <li>Video analysis for subtle mechanical issues</li>
+                        <li>Vary practice conditions and demands</li>
+                        <li>Consider professional biomechanical assessment</li>
+                        <li>Focus on situational shooting rather than raw percentage</li>
+                    </ul>
+                </div>
+                
+                <h3>Assessment Tools for Coaches</h3>
+                
+                <h4>Visual Observation Checklist</h4>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Phase</th>
+                            <th>Key Observations</th>
+                            <th>Red Flags</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Setup</td>
+                            <td>Balanced stance, proper grip</td>
+                            <td>Leaning, inconsistent hand placement</td>
+                        </tr>
+                        <tr>
+                            <td>Loading</td>
+                            <td>Smooth elevation, elbow alignment</td>
+                            <td>Rushed motion, elbow flare</td>
+                        </tr>
+                        <tr>
+                            <td>Release</td>
+                            <td>High release point, finger snap</td>
+                            <td>Low release, thumb push</td>
+                        </tr>
+                        <tr>
+                            <td>Follow-through</td>
+                            <td>Wrist snap, finger direction</td>
+                            <td>Stiff wrist, sideways fingers</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h4>When to Seek Advanced Analysis</h4>
+                <ul>
+                    <li><strong>Persistent mechanical issues</strong> despite coaching intervention</li>
+                    <li><strong>Player shooting 80%+</strong> in practice but significantly lower in games</li>
